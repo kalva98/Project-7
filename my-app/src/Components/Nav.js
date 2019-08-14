@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
-import { navLink } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, NavLink } from 'react-router-dom';
 
-const Nav = () => (
-    <nav>
-        <ul>
-            <li><navLink to="/flower">Flower</navLink></li>
-            <li><navLink to="/cabin">Cabin</navLink></li>
-            <li><navLink to="/forest">Forest</navLink></li>
-        </ul>
-    </nav>
+const Nav = () => {
+    return (
+        <BrowserRouter>
+            <nav>
+            <ul>
+                <li><NavLink to="/flowers">Flowers</NavLink></li>
+                <li><NavLink to="/cabin">Cabin</NavLink></li>
+                <li><NavLink to="/forest">Forest</NavLink></li>
+            </ul>
+            </nav>
+        </BrowserRouter> 
     )
-    
+}
+
 export default Nav;
