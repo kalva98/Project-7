@@ -1,5 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+In order to run you will need to create a config.js file and put it in the component folder. Config file should look like this:
+const apiKey =
+
 ## Available Scripts
 
 In the project directory, you can run:
