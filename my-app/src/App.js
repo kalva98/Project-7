@@ -3,6 +3,7 @@ import axios from 'axios';
 import apiKey from './config.js';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
+//App components
 import GifList from './Components/GifList';
 import SearchForm from './Components/SearchForm';
 import './index.css';
@@ -17,7 +18,7 @@ export default class App extends Component {
       loading: true
     };
   }
-
+//Used get request axios to obtain images from Flickr 
   performSearch = (query = "sunset") => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&extras=url_o&per_page=12&format=json&nojsoncallback=1`)
       .then(response => {
@@ -35,10 +36,11 @@ export default class App extends Component {
     this.performSearch();
   }
 
+  //Routes
   render() {
     return (
       <div className="container">
-        <h1>Awesome Gallery App</h1>
+        <h1>React Gallery App</h1>
         
 
         <BrowserRouter>
@@ -51,6 +53,7 @@ export default class App extends Component {
             <Route path="/hydrangeas" render={(props) => <GifList {...props} data={this.state.image} />} />
             <Route path="/mountains" render={(props) => <GifList {...props} data={this.state.image} />} />
             <Route path="/forest" render={(props) => <GifList {...props} data={this.state.image} />} />
+            
           </Switch>
 
         </BrowserRouter>

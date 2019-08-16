@@ -13,10 +13,8 @@ const GifList = props => {
     }
 
     return (
-        //wrapping ul elements which displays list of gif via gif component
-       
-
-        <div className='photo-container'>
+        
+       <div className='photo-container'>
             <ul className="photo-container" >
                 {photos}
             </ul> 
