@@ -9,7 +9,6 @@ import './index.css';
 import Nav from './Components/Nav';
 
 
-
 export default class App extends Component {
   constructor() {
     super();
@@ -19,7 +18,7 @@ export default class App extends Component {
     };
   }
 
-  performSearch = (query ="food") => {
+  performSearch = (query = "sunset") => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&extras=url_o&per_page=12&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({
@@ -40,15 +39,17 @@ export default class App extends Component {
     return (
       <div className="container">
         <h1>Awesome Gallery App</h1>
-        <SearchForm onSearch={this.performSearch} />
-       
+        
+
         <BrowserRouter>
+          <SearchForm onSearch={this.performSearch} />
           <Nav performSearch={this.performSearch} />
-         
+
           <Switch>
-            <Route exact path="/" render={() => <Redirect to="/flowers" />} />
-            <Route path="/flowers" render={(props) => <GifList {...props} data={this.state.image} />} />
-            <Route path="/cabin" render={(props) => <GifList {...props} data={this.state.image} />} />
+            <Route exact path="/" render={() => <Redirect to="/mountains" />} />
+            <Route path={`match.search/:id`} component={SearchForm} />
+            <Route path="/hydrangeas" render={(props) => <GifList {...props} data={this.state.image} />} />
+            <Route path="/mountains" render={(props) => <GifList {...props} data={this.state.image} />} />
             <Route path="/forest" render={(props) => <GifList {...props} data={this.state.image} />} />
           </Switch>
 
@@ -56,8 +57,8 @@ export default class App extends Component {
         <div className='photo-container'>
           {
             (this.state.loading)
-            ? (<p>Loading...</p>)
-              : <GifList data={this.state.image}/>
+              ? (<p>Loading...</p>)
+              : <GifList data={this.state.image} />
           }
         </div>
       </div>

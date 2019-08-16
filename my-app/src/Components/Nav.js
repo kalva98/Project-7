@@ -6,8 +6,8 @@ const Nav = (props) => {
        
             <nav className="main-nav">
                 <ul>
-                    <li><NavLink to="/flowers" onClick={() => { props.performSearch("flowers") }} > Flowers </NavLink></li>
-                    <li><NavLink to="/cabin" onClick={() => {props.performSearch("cabin") }} > Cabin </NavLink></li>
+                    <li><NavLink to="/hydrangeas" onClick={() => { props.performSearch("hydrangeas") }} > Hydrangeas </NavLink></li>
+                    <li><NavLink to="/mountains" onClick={() => {props.performSearch("mountains") }} > Mountains </NavLink></li>
                     <li><NavLink to="/forest" onClick={() => { props.performSearch("forest") }} > Forest </NavLink></li>
                 </ul>
             </nav>

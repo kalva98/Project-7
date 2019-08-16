@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
-export default class SearchForm extends Component {
+class SearchForm extends Component {
 
     state = {
         searchText: ''
@@ -13,9 +14,11 @@ export default class SearchForm extends Component {
     //function called when form submitted
      handleSubmit = e => {
         //calls preventDefault
-        e.preventDefault();
+         e.preventDefault();
+         
         //evoke performSearch function that fetches data
-        this.props.onSearch(this.query.value);
+         this.props.onSearch(this.query.value);
+         this.props.history.push(`/search/${this.state.searchText}`)
         //resets current field on submit with currentTarget.reset
         e.currentTarget.reset();
     }
@@ -38,3 +41,5 @@ export default class SearchForm extends Component {
         );
     }
 }
+
+export default withRouter(SearchForm);
