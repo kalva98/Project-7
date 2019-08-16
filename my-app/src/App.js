@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import apiKey from './config.js';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import GifList from './Components/GifList';
 import SearchForm from './Components/SearchForm';
 import './index.css';
 import Nav from './Components/Nav';
+
+
 
 export default class App extends Component {
   constructor() {
@@ -16,8 +19,8 @@ export default class App extends Component {
     };
   }
 
-  performSearch = (query = 'waterfall') => {
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&extras=url_o&per_page=24&format=json&nojsoncallback=1`)
+  performSearch = (query ="food") => {
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&extras=url_o&per_page=12&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({
           image: response.data.photos.photo,
@@ -34,25 +37,34 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(this.state.image);
     return (
-      <div>
-        <div className="container">
-          <SearchForm onSearch={this.performSearch} />
-        </div>
+      <div className="container">
+        <h1>Awesome Gallery App</h1>
+        <SearchForm onSearch={this.performSearch} />
+       
+        <BrowserRouter>
+          <Nav performSearch={this.performSearch} />
+         
+          <Switch>
+            <Route exact path="/" render={() => <Redirect to="/flowers" />} />
+            <Route path="/flowers" render={(props) => <GifList {...props} data={this.state.image} />} />
+            <Route path="/cabin" render={(props) => <GifList {...props} data={this.state.image} />} />
+            <Route path="/forest" render={(props) => <GifList {...props} data={this.state.image} />} />
+          </Switch>
 
-        <nav class="main-nav">
-          <Nav />
-        </nav>
-
-        <div className="photo-container">
+        </BrowserRouter>
+        <div className='photo-container'>
           {
             (this.state.loading)
-              ? <p> Loading...</p>
-              : <GifList data={this.state.image} />
+            ? (<p>Loading...</p>)
+              : <GifList data={this.state.image}/>
           }
         </div>
       </div>
     );
   }
 }
+
+
+
+
