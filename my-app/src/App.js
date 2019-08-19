@@ -9,7 +9,7 @@ import SearchForm from './Components/SearchForm';
 import './index.css';
 import Nav from './Components/Nav';
 
-
+//Index.js is entry file for App cause it imports parent component for App.js & allows for use of App tag in ReactDOM.render
 export default class App extends Component {
   constructor() {
     super();
@@ -22,11 +22,13 @@ export default class App extends Component {
   performSearch = (query = "sunset") => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&extras=url_o&per_page=12&format=json&nojsoncallback=1`)
       .then(response => {
+        //Setstate to dynamically capture the array of image
         this.setState({
           image: response.data.photos.photo,
           loading: false
         });
       })
+      //Catch error code captures error retrieving JSon data
       .catch(error => {
         console.log('Error fetching and parsing data', error);
       });
@@ -46,7 +48,7 @@ export default class App extends Component {
         <BrowserRouter>
           <SearchForm onSearch={this.performSearch} />
           <Nav performSearch={this.performSearch} />
-
+          {/*using switch implements a downward sequence for checking the urls path (parent & children)*/}
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/mountains" />} />
             <Route path={`match.search/:id`} component={SearchForm} />
