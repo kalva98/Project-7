@@ -1,6 +1,6 @@
 import React from 'react';
 
-//presentational component ontaining template that displays each gif
+//presentational component containing template that displays each gif
 const Photo = (props) => (
   
         <li >
